@@ -24,7 +24,7 @@ function Login() {
       navigate('/home');
     } catch (error) {
       console.error('Login errors:', error);
-      // Handle login error (e.g., show error message)
+      alert(error);
     }
   };
 
