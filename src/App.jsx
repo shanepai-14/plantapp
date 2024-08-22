@@ -91,7 +91,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: 'plantapp/register',
+    path: '/plantapp/register',
     element: <Register />,
   },
   {

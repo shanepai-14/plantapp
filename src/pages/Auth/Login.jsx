@@ -77,7 +77,7 @@ function Login() {
           >
             Sign In
           </Button>
-          <Link component={RouterLink} to="plantapp/register" variant="body2">
+          <Link component={RouterLink} to="/plantapp/register" variant="body2">
             {"Don't have an account? Sign Up"}
           </Link>
         </Box>
