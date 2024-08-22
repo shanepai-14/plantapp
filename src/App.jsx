@@ -87,15 +87,14 @@ const theme = createTheme({
 
 const router = createBrowserRouter([
   {
-    path: '/plant-app/',
+    path: '/plantapp/',
     element: <Login />,
   },
   {
-    path: '/register',
+    path: 'plantapp/register',
     element: <Register />,
   },
   {
-    path: '/',
     element: <PrivateRoute><Layout /></PrivateRoute>,
     children: [
       {

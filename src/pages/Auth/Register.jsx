@@ -26,7 +26,7 @@ function Register() {
     }
     try {
       await register(email, password);
-      navigate('/dashboard');
+      navigate('/plantapp/home');
     } catch (error) {
       console.error('Registration error:', error);
       // Handle registration error (e.g., show error message)
@@ -93,7 +93,7 @@ function Register() {
           >
             Sign Up
           </Button>
-          <Link component={RouterLink} to="/plant-app" variant="body2">
+          <Link component={RouterLink} to="/plantapp" variant="body2">
             {"Already have an account? Sign In"}
           </Link>
         </Box>
