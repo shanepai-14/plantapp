@@ -18,7 +18,7 @@ function Layout() {
           }}
           showLabels
         >
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/home" />
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/plantapp/home" />
           <BottomNavigationAction label="Profile" icon={<PersonIcon />} value="/profile" />
           <BottomNavigationAction label="Settings" icon={<SettingsIcon />} value="/settings" />
         </BottomNavigation>

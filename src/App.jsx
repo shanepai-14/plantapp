@@ -98,7 +98,7 @@ const router = createBrowserRouter([
     element: <PrivateRoute><Layout /></PrivateRoute>,
     children: [
       {
-        path: 'home',
+        path: '/plantapp/home',
         element: <HomePage />,
       },
       // {

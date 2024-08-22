@@ -29,7 +29,7 @@ function Register() {
       navigate('/plantapp/home');
     } catch (error) {
       console.error('Registration error:', error);
-      // Handle registration error (e.g., show error message)
+     alert(error);
     }
   };
 

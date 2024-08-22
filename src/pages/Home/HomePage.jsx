@@ -17,7 +17,7 @@ const Home = () => {
             videoConstraints={{
                 width: window.innerWidth, // Dynamic width based on screen size
                 height: window.innerHeight, // Dynamic height based on screen size
-                facingMode: 'user', // Front camera
+                facingMode: 'environment', // Front camera
             }}
           />
           <button onClick={capture}>Capture Photo</button>
