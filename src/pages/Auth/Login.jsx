@@ -23,7 +23,7 @@ function Login() {
       await login(email, password);
       navigate('/home');
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Login errors:', error);
       // Handle login error (e.g., show error message)
     }
   };
