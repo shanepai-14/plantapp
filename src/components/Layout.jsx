@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import { Home as HomeIcon, Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material';
+import { Home as HomeIcon, Person as PersonIcon, Settings as SettingsIcon ,CameraAlt } from '@mui/icons-material';
 
 function Layout() {
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ function Layout() {
           showLabels
         >
           <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/plantapp/home" />
-          <BottomNavigationAction label="Profile" icon={<PersonIcon />} value="/profile" />
-          <BottomNavigationAction label="Settings" icon={<SettingsIcon />} value="/settings" />
+          <BottomNavigationAction label="Scan" icon={<CameraAlt />} value="/plantapp/scan" />
+          <BottomNavigationAction label="Settings" icon={<SettingsIcon />} value="/plantapp/settings" />
         </BottomNavigation>
       </Paper>
     </>

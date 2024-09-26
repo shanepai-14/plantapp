@@ -8,8 +8,10 @@ import { AuthProvider } from './AuthContext';
 import Layout from './components/Layout';
 import PrivateRoute from './PrivateRoute';
 import HomePage from './pages/Home/HomePage';
+import ScanPage from './pages/Scan/ScanPage';
 const theme = createTheme({
-  palette: {
+  palette: { 
+     mode: 'light',
     primary: {
       main: '#569033', // Your specified green color
       light: '#7ab356',
@@ -100,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: '/plantapp/home',
         element: <HomePage />,
+      },
+      {
+        path: '/plantapp/scan',
+        element: <ScanPage />,
       },
       // {
       //   path: 'profile',
