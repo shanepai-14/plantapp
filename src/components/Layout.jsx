@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Home as HomeIcon, Person as PersonIcon, Settings as SettingsIcon ,CameraAlt } from '@mui/icons-material';
-
+import SpaIcon from '@mui/icons-material/Spa';
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,7 +20,7 @@ function Layout() {
         >
           <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/plantapp/home" />
           <BottomNavigationAction label="Scan" icon={<CameraAlt />} value="/plantapp/scan" />
-          <BottomNavigationAction label="Settings" icon={<SettingsIcon />} value="/plantapp/settings" />
+          <BottomNavigationAction label="My Plants" disabled={true} icon={<SpaIcon />} value="/plantapp/settings" />
         </BottomNavigation>
       </Paper>
     </>

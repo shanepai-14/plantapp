@@ -1,15 +1,15 @@
 import React from 'react';
-import { List, ListItem, ListItemText, IconButton, Divider, Typography,Box } from '@mui/material';
+import { List, ListItem, ListItemText, IconButton, Divider, Typography,Box ,Stack, Chip} from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-const PlantList = ({ plants,handleOpenPlantDetails }) => {
+import VisibilityIcon from '@mui/icons-material/Visibility';
+const PlantDiagnosis = ({ plants,handleSelectedDiagnosis }) => {
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', p:0,mt:3}}>
       {plants.map((plant, index) => (
         <React.Fragment key={plant.id}>
           <ListItem alignItems="flex-start" sx={{p:0}}  secondaryAction={
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleOpenPlantDetails(plant.id)}>
-                      <FavoriteIcon/>
+                    <IconButton edge="end" aria-label="delete" onClick={() => handleSelectedDiagnosis(plant)}>
+                      <VisibilityIcon />
                     </IconButton>
                   }>
             <Box>
@@ -31,13 +31,23 @@ const PlantList = ({ plants,handleOpenPlantDetails }) => {
           
               secondary={
                 <>
-                  <Typography
+                  {/* <Typography
                     component="span"
                     variant="body2"
                     sx={{ color: 'text.primary', display: 'inline',textAlign: 'start' }}
                   >
                     Probability
-                  </Typography>
+                  </Typography> */}
+                  {/* <Stack
+                direction="row"
+                spacing={1}
+                sx={{ flexWrap: "wrap" }}
+                useFlexGap
+              >
+                {plant.details.classification.map((name, index) => (
+                  <Chip key={index} label={name} />
+                ))}
+              </Stack> */}
                    <Gauge
                    width={100}
                    height={100}
@@ -71,4 +81,4 @@ const PlantList = ({ plants,handleOpenPlantDetails }) => {
   );
 };
 
-export default PlantList;
+export default PlantDiagnosis;
