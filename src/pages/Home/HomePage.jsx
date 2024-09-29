@@ -4,8 +4,8 @@ import PlantCard from './PlantCard';
 import SearchIcon from '@mui/icons-material/Search';
 import { API_KEY,API_URL } from '../../utils/endpoint';
 import PlantDetailsModal from '../../components/PlantDetailsModal';
-
-
+import CardSkeleton from '../../components/CardSkeleton';
+import { fetchFavorites } from '../../data';
 
 const Home = () => {
  
@@ -14,9 +14,11 @@ const Home = () => {
       const [loading, setLoading] = useState(false);
       const [modalOpen, setModalOpen] = useState(false);
       const [selectedPlantToken, setSelectedPlantToken] = useState(null);
-      
+      const [favorites, setFavorites] = useState([]);
+
       useEffect(() => {
 
+         loadFavorites();
           searchPlants();
 
       }, []);
@@ -32,6 +34,13 @@ const Home = () => {
         setModalOpen(true);
       }, []);
 
+
+
+      const loadFavorites = async () => {
+        const favors = await fetchFavorites();
+        console.log(favors)
+        setFavorites(favors);
+      };
 
         const searchPlants = async () => {
           setLoading(true);
@@ -84,17 +93,28 @@ const Home = () => {
         }}
       />
           </Box>
-          <Grid container  spacing={2} style={{ marginTop: 76,paddingLeft:10,paddingRight:10 }}>
-            {plants.map((plant) => (
-              <Grid item xs={6} sm={6} md={4} key={plant.access_token}>
-                <PlantCard plant={plant} handlePlantDetails={handlePlantDetails}/>
+                  {loading ? (
+            <Grid container spacing={2} style={{ marginTop: 76, paddingLeft: 10, paddingRight: 10 }}>
+            {[...Array(10)].map((_, index) => (
+              <Grid item xs={6} sm={6} md={4} key={index}>
+                <CardSkeleton />
               </Grid>
             ))}
           </Grid>
+        ) : (
+          <Grid container spacing={2} style={{ marginTop: 76, paddingLeft: 10, paddingRight: 10 }}>
+            {plants.map((plant) => (
+              <Grid item xs={6} sm={6} md={4} key={plant.access_token}>
+                <PlantCard plant={plant} favorites={favorites} handlePlantDetails={handlePlantDetails} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
           <PlantDetailsModal
         open={modalOpen}
         handleClose={handleCloseModal}
         accessToken={selectedPlantToken}
+        favorites={favorites}
       />
         </div>
       

@@ -9,6 +9,7 @@ import Layout from './components/Layout';
 import PrivateRoute from './PrivateRoute';
 import HomePage from './pages/Home/HomePage';
 import ScanPage from './pages/Scan/ScanPage';
+import MyPlantsPage from './pages/MyPlants/MyPlantsPage';
 const theme = createTheme({
   palette: { 
      mode: 'light',
@@ -107,10 +108,10 @@ const router = createBrowserRouter([
         path: '/plantapp/scan',
         element: <ScanPage />,
       },
-      // {
-      //   path: 'profile',
-      //   element: <ProfilePage />,
-      // },
+      {
+        path: '/plantapp/myplants',
+        element: <MyPlantsPage />,
+      },
       // {
       //   path: 'settings',
       //   element: <SettingsPage />,

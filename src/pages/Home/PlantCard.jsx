@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography ,Box} from '@mui/material';
 import EastIcon from '@mui/icons-material/East';
-const PlantCard = ({ plant ,handlePlantDetails}) => {
+const PlantCard = ({ plant ,handlePlantDetails ,favorites}) => {
   const imageSrc = `data:image/jpeg;base64,${plant.thumbnail}`;
   return (
     <Card>
@@ -42,6 +42,7 @@ const PlantCard = ({ plant ,handlePlantDetails}) => {
             borderRadius: "100%",
             cursor: "pointer"
           }}
+          disabled={favorites == null || []}
           onClick={() => handlePlantDetails(plant.access_token)}
         >
           <EastIcon fontSize="20px" sx={{ color: "white" }} />

@@ -125,8 +125,13 @@ const PlantDetailsList = ({ plantDetails }) => {
             <ListItemText
               primary="More Information..."
               primaryTypographyProps={{ color: 'primary' }}
+              secondaryTypographyProps={{
+                overflow: 'hidden',
+                textOverflow:'ellipsis'
+              }}
               secondary={
-                <Link href={plantDetails.details.url} target="_blank" rel="noopener noreferrer">
+                <Link href={plantDetails.details.url} 
+                target="_blank" rel="noopener noreferrer">
                   {plantDetails.details.url}
                 </Link>
               }

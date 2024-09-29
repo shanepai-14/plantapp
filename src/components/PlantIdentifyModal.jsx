@@ -181,9 +181,27 @@ const PlantIdentifyModal = ({
             backgroundColor: "white",
             marginTop: "-20px",
             zIndex: 999,
+            position: "relative"
           }}
         >
-          <Box display="flex" justifyContent="space-between">
+             <Button
+            size="large"
+            component="label"
+            variant="contained"
+            tabIndex={-1}
+            startIcon={value == 0 ? <YardIcon fontSize="20px" /> : <MonitorHeartIcon />}
+            sx={{ position: 'absolute',top: -50,left: 10}}
+          >
+            {value == 0
+              ? PlantDetails?.result?.is_plant 
+                ? (PlantDetails.result.is_plant.probability * 100).toFixed(0) + '% Plant'
+                : "Loading..."
+              : plantDiagnosis?.result?.is_healthy 
+                ? (plantDiagnosis.result.is_healthy.probability * 100).toFixed(0) + "% Healthy"
+                : "Loading..."}
+            
+          </Button>
+          <Box display="flex" justifyContent="center">
             {/* <Typography
                 id="plant-details-modal"
                 variant="h4"
@@ -197,27 +215,12 @@ const PlantIdentifyModal = ({
               onChange={handleChange}
               aria-label="icon label tabs example"
               disabled={isLoading}
+              variant="fullWidth"
             >
               <Tab icon={<CenterFocusWeakIcon />} label="Suggestions" />
               <Tab icon={<HealthAndSafetyIcon />} label="Diagnose" />
             </Tabs>
-            <Button
-            size="large"
-            component="label"
-            variant="text"
-            tabIndex={-1}
-            startIcon={value == 0 ? <YardIcon fontSize="20px" /> : <MonitorHeartIcon />}
-            sx={{ padding: 0 }}
-          >
-            {value == 0
-              ? PlantDetails?.result?.is_plant 
-                ? (PlantDetails.result.is_plant.probability * 100).toFixed(0)
-                : "Loading..."
-              : plantDiagnosis?.result?.is_healthy 
-                ? (plantDiagnosis.result.is_healthy.probability * 100).toFixed(0)
-                : "Loading..."}
-            %
-          </Button>
+          
           </Box>
 
           {value === 0 && (

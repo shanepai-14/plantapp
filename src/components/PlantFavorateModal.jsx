@@ -17,6 +17,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { saveToFavorites } from "../data";
+
+
 const DescriptionWithReadMore = ({ description }) => {
   const [showFullText, setShowFullText] = useState(false);
   const toggleShowText = () => setShowFullText(!showFullText);
@@ -42,7 +44,7 @@ const DescriptionWithReadMore = ({ description }) => {
   );
 };
 
-const PlantTaxonomy = ({ plantDetails }) => {
+const PlantTaxonomy = ({ plant }) => {
   const {
     class: plantClass,
     genus,
@@ -50,7 +52,7 @@ const PlantTaxonomy = ({ plantDetails }) => {
     family,
     phylum,
     kingdom,
-  } = plantDetails.taxonomy;
+  } = plant.taxonomy;
 
   const taxonomyString = `${kingdom}, ${phylum}, ${plantClass}, ${order}, ${family}, ${genus}`;
 
@@ -63,55 +65,10 @@ const PlantTaxonomy = ({ plantDetails }) => {
   );
 };
 
-const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
-  const [plantDetails, setPlantDetails] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const fetchPlantDetails = async () => {
-      if (!accessToken) return;
-
-      setLoading(true);
-      setError(null);
-
-      try {
-        const response = await axios.get(`${API_URL}/${accessToken}`, {
-          params: {
-            details:
-              "common_names,url,description,taxonomy,rank,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods",
-            language: "en",
-          },
-          headers: {
-            "Content-Type": "application/json",
-            "Api-Key": API_KEY,
-          },
-        });
-        console.log(response.data);
-        setPlantDetails(response.data);
-      } catch (error) {
-        console.error("Error fetching plant details:", error);
-        setError("Failed to fetch plant details. Please try again.");
-      } finally {
-        setLoading(false);
-        
-      }
-    };
-
-    if (open) {
-      fetchPlantDetails();
-    }
-  }, [open, accessToken]);
-
-  useEffect(() => {
-
-  if(plantDetails){
-    const found = favorites.some(fav => fav.entity_id === plantDetails.entity_id);
-    setIsFavorite(found);
-  }
-   
-  },[plantDetails])
+const PlantFavoriteModal = ({ open, handleClose, plant  }) => {
+   if(plant == []){
+    return;
+   }
 
   return (
     <Modal
@@ -136,8 +93,6 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
       >
         <IconButton
             color="default"
-          onClick={() => saveToFavorites(plantDetails)}
-          disabled={isFavorite}
           sx={{
             position: "fixed", // Fix position to the modal
             top: 10,
@@ -145,11 +100,9 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
             backgroundColor:"rgba(255, 255, 255, 0.5)"
           }}
         >
-         {isFavorite ? (
-        <FavoriteIcon sx={{ color: "red" }} /> // Show filled heart if it's a favorite
-      ) : (
-        <FavoriteBorderIcon sx={{ color: "red" }} /> // Show outline heart if not a favorite
-      )}
+
+        <FavoriteIcon sx={{ color: "red" }} /> 
+ 
         </IconButton>
         <IconButton
             color="default"
@@ -163,11 +116,11 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
         >
           <CloseIcon sx={{color:'black'}}/>
         </IconButton>
-        {plantDetails && (
+        {plant && (
           <>
             <img
-              src={plantDetails.image.value}
-              alt={plantDetails.name}
+              src={plant.image.value}
+              alt={plant.name}
               style={{ width: "100%", zIndex: -1, position: "relative" }}
   
             />
@@ -188,7 +141,7 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
                 sx={{ fontWeight: "bold" }}
                 component="h2"
               >
-                {plantDetails.name}
+                {plant.name}
               </Typography>
               <Stack
                 direction="row"
@@ -196,8 +149,8 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
                 sx={{ flexWrap: "wrap" }}
                 useFlexGap
               >
-              {plantDetails.common_names && plantDetails.common_names.length > 0 ? (
-              plantDetails.common_names.map((name, index) => (
+              {plant.common_names && plant.common_names.length > 0 ? (
+              plant.common_names.map((name, index) => (
                 <Chip key={index} label={name} />
               ))
             ) : (
@@ -205,20 +158,20 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
             )}
               </Stack>
               <DescriptionWithReadMore
-                description={plantDetails.description.value}
+                description={plant.description.value}
               />
               <List>
 
                 <ListItem>
-                  <PlantTaxonomy plantDetails={plantDetails} />
+                  <PlantTaxonomy plant={plant} />
                 </ListItem>
                 <ListItem>
                   <ListItemText
                     primary="Edible Parts"
                     primaryTypographyProps={{ fontWeight: "bold" }}
                     secondary={
-                      plantDetails.edible_parts
-                        ? plantDetails.edible_parts.join(", ")
+                      plant.edible_parts
+                        ? plant.edible_parts.join(", ")
                         : "None"
                     }
                   />
@@ -228,8 +181,8 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
                     primary="Propagation Methods"
                     primaryTypographyProps={{ fontWeight: "bold" }}
                     secondary={
-                      plantDetails.propagation_methods
-                        ? plantDetails.propagation_methods.join(", ")
+                      plant.propagation_methods
+                        ? plant.propagation_methods.join(", ")
                         : "None"
                     }
                   />
@@ -243,4 +196,4 @@ const PlantDetailsModal = ({ open, handleClose, accessToken ,favorites }) => {
   );
 };
 
-export default PlantDetailsModal;
+export default PlantFavoriteModal;

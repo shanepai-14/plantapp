@@ -20,7 +20,7 @@ function Layout() {
         >
           <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/plantapp/home" />
           <BottomNavigationAction label="Scan" icon={<CameraAlt />} value="/plantapp/scan" />
-          <BottomNavigationAction label="My Plants" disabled={true} icon={<SpaIcon />} value="/plantapp/settings" />
+          <BottomNavigationAction label="My Plants"  icon={<SpaIcon />} value="/plantapp/myplants" />
         </BottomNavigation>
       </Paper>
     </>
