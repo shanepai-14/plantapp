@@ -10,6 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import HomePage from './pages/Home/HomePage';
 import ScanPage from './pages/Scan/ScanPage';
 import MyPlantsPage from './pages/MyPlants/MyPlantsPage';
+import LoadingScreen from './pages/LoadingScreen';
 const theme = createTheme({
   palette: { 
      mode: 'light',
@@ -91,10 +92,14 @@ const theme = createTheme({
 const router = createBrowserRouter([
   {
     path: '/plantapp/',
+    element: <LoadingScreen />,
+  },
+  {
+    path: '/plantapp/login',
     element: <Login />,
   },
   {
-    path: '/plantapp/register',
+    path: '/plantapp/signup',
     element: <Register />,
   },
   {

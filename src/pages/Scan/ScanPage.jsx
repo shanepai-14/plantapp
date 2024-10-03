@@ -3,9 +3,10 @@ import Camera from '../../components/Camera'
 import { Button, Modal, CircularProgress, Box, Typography ,LinearProgress} from '@mui/material';
 import { Folder as FolderIcon } from '@mui/icons-material';
 import axios from 'axios';
-import { API_IDENTIFICATION_URL,API_KEY } from '../../utils/endpoint';
+import { API_IDENTIFICATION_URL,API_KEY , API_URL} from '../../utils/endpoint';
 import PlantIdentifyModal from '../../components/PlantIdentifyModal';
 import PlantDetailsModal from '../../components/PlantDetailsModal';
+import { fetchFavorites } from '../../data';
 const ScanPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -13,9 +14,12 @@ const ScanPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPlantToken, setSelectedPlantToken] = useState(null);
   const [progress, setProgress] = useState(0);
-
-  
+  const [favorites, setFavorites] = useState([]);
+  const [plantListLoading,setPlantListLoading] = useState(false);
   useEffect(() => {
+
+    loadFavorites();
+
     let timer;
     if (isLoading) {
       timer = setInterval(() => {
@@ -74,19 +78,53 @@ const ScanPage = () => {
     };
   };
 
+  const loadFavorites = async () => {
+    const favors = await fetchFavorites();
+    console.log(favors)
+    setFavorites(favors);
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setResult(null);
   };
-  const handlePlantClick = (token) => {
-    setSelectedPlantToken(token);
-    setModalOpen(true);
+  const handleCloseModalPlantDetails = () => {
+      setModalOpen(false);
+      console.log(modalOpen,false);
+      setSelectedPlantToken(null);
   };
 
-  const handleOpenPlantDetails = (token) => {
-    setModalOpen(true);
-    setSelectedPlantToken(token)
-  }
+  const handleOpenPlantDetails = async (name) => {
+    setPlantListLoading(true)
+    try {
+      const response = await fetch(`${API_URL}/name_search?q=${encodeURIComponent(name)}&thumbnails=true`, {
+        headers: {
+          'Api-Key': API_KEY,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+  
+      if (data.entities && data.entities.length > 0) {
+        console.log(name,data.entities);
+        setSelectedPlantToken(data.entities[0].access_token);
+      } else {
+        console.warn('No plant data found for:', name);
+      }
+  
+    } catch (error) {
+      console.error('Error fetching plant details:', error);
+      // You might want to set an error state here to display to the user
+    } finally {
+      setModalOpen(true);
+      setPlantListLoading(false)
+    }
+  };
   const sendImageToApi = async (base64Image) => {
     setIsLoading(true);
     try {
@@ -159,12 +197,13 @@ const ScanPage = () => {
         </Button>
         </label>
      </Box>
-   {result && <PlantIdentifyModal handleOpenPlantDetails={handleOpenPlantDetails} open={isModalOpen} PlantDetails={result} handleClose={handleCloseModal}/>}
+   {result && <PlantIdentifyModal plantListLoading={plantListLoading} handleOpenPlantDetails={handleOpenPlantDetails} open={isModalOpen} PlantDetails={result} handleClose={handleCloseModal}/>}
 
    <PlantDetailsModal
         open={modalOpen}
-        handleClose={handlePlantClick}
+        handleClose={handleCloseModalPlantDetails}
         accessToken={selectedPlantToken}
+        favorites={favorites}
       />
      
         </div>

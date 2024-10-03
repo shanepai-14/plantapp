@@ -31,6 +31,7 @@ const PlantIdentifyModal = ({
   handleClose,
   PlantDetails,
   handleOpenPlantDetails,
+  plantListLoading
 }) => {
   const [value, setValue] = useState(0);
   const [plantDiagnosis, setPlantDiagnosis] = useState(null);
@@ -227,6 +228,7 @@ const PlantIdentifyModal = ({
             <PlantList
               handleOpenPlantDetails={handleOpenPlantDetails}
               plants={PlantDetails.result.classification.suggestions}
+              loading={plantListLoading} 
             />
           )}
 
