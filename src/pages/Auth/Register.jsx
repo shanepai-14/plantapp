@@ -10,7 +10,7 @@ import {
   Link,
   Fade
 } from '@mui/material';
-import Logo from '../../../public/plantlogo.png';
+import Logo from '/plantlogo.png';
 
 function Register() {
   const [email, setEmail] = useState('');

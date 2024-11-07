@@ -11,6 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'Plant App',
         short_name: 'Plant App',
+        start_url: '/', 
         theme_color: '#ffffff',
         icons: [
             {

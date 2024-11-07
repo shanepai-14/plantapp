@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, CircularProgress, Fade, Typography,Button,Stack } from "@mui/material";
-import Logo from "../../public/plantlogo.png";
-import Bg from "../../public/plantbg1.jpg";
+import Logo from "/plantlogo.png";
+import Bg from "/plantbg1.jpg";
 import { Link } from 'react-router-dom';
 const LoadingScreen = () => {
   const [loading, setLoading] = useState(true);
