@@ -127,7 +127,7 @@ const Camera = ({ sendImageToApi }) => {
         playsInline 
         style={{ 
           width: '100%', 
-          height: '100vh',
+          height: 'calc(100vh - 56px)',  
           maxHeight: '100vh',
           objectFit: 'cover'
         }}
