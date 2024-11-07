@@ -10,5 +10,5 @@ export default function PrivateRoute({ children }) {
     return <div>Loading...</div>;
   }
 
-  return user ? children : <Navigate to="/plantapp" replace />;
+  return user ? children : <Navigate to="/" replace />;
 }

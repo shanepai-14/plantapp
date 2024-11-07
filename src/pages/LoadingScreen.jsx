@@ -69,7 +69,7 @@ const LoadingScreen = () => {
          <Stack spacing={2} sx={{ width: 150, marginBottom: 15 }}>
       <Button
         component={Link}
-        to="/plantapp/login" // Route for Log in
+        to="/login" // Route for Log in
         variant="contained"
         size="large"
         sx={{ boxShadow: 10 }}
@@ -80,7 +80,7 @@ const LoadingScreen = () => {
 
       <Button
         component={Link}
-        to="/plantapp/signup" // Route for Sign up
+        to="/signup" // Route for Sign up
         variant="contained"
         size="large"
         sx={{ boxShadow: 10 }}

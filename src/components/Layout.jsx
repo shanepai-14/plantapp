@@ -18,9 +18,9 @@ function Layout() {
           }}
           showLabels
         >
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/plantapp/home" />
-          <BottomNavigationAction label="Scan" icon={<CameraAlt />} value="/plantapp/scan" />
-          <BottomNavigationAction label="My Plants"  icon={<SpaIcon />} value="/plantapp/myplants" />
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} value="/home" />
+          <BottomNavigationAction label="Scan" icon={<CameraAlt />} value="/scan" />
+          <BottomNavigationAction label="My Plants"  icon={<SpaIcon />} value="/myplants" />
         </BottomNavigation>
       </Paper>
     </>

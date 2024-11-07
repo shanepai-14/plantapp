@@ -38,7 +38,7 @@ function Login() {
     if (validateForm()) {
       try {
         await login(email, password);
-        navigate('/plantapp/home');
+        navigate('/home');
       } catch (error) {
         console.error('Login error:', error);
         setErrors({ ...errors, submit: 'Invalid email or password. Please try again.' });
@@ -105,7 +105,7 @@ function Login() {
             >
               Sign In
             </Button>
-            <Link component={RouterLink} to="/plantapp/signup" variant="body2">
+            <Link component={RouterLink} to="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
           </Box>

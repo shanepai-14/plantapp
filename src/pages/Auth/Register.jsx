@@ -39,7 +39,7 @@ function Register() {
     if (validateForm()) {
       try {
         await register(email, password);
-        navigate('/plantapp/home');
+        navigate('/home');
       } catch (error) {
         console.error('Registration error:', error);
         setErrors({ ...errors, submit: 'Registration failed. Please try again.' });
@@ -119,7 +119,7 @@ function Register() {
             >
               Sign Up
             </Button>
-            <Link component={RouterLink} to="/plantapp/login" variant="body2">
+            <Link component={RouterLink} to="/login" variant="body2">
               {"Already have an account? Sign In"}
             </Link>
           </Box>

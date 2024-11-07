@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'Plant App',
         short_name: 'PlantApp',
-        start_url: '/plantapp/', 
+        start_url: '/', 
         display: 'standalone', 
         background_color: '#ffffff',
         theme_color: '#ffffff',
@@ -42,5 +42,4 @@ export default defineConfig({
       }, 
     })
   ],
-  base: "/plantapp/"
 })
