@@ -10,8 +10,10 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
         name: 'Plant App',
-        short_name: 'Plant App',
-        start_url: '/', 
+        short_name: 'PlantApp',
+        start_url: '/plantapp/', 
+        display: 'standalone', 
+        background_color: '#ffffff',
         theme_color: '#ffffff',
         icons: [
             {
