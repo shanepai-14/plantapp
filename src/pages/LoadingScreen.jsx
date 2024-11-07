@@ -28,7 +28,6 @@ const LoadingScreen = () => {
         <Box
           sx={{
             marginTop: 3,
-            display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "start",
