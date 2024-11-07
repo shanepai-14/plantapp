@@ -7,6 +7,8 @@ import { API_IDENTIFICATION_URL,API_KEY , API_URL} from '../../utils/endpoint';
 import PlantIdentifyModal from '../../components/PlantIdentifyModal';
 import PlantDetailsModal from '../../components/PlantDetailsModal';
 import { fetchFavorites } from '../../data';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const ScanPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -16,6 +18,17 @@ const ScanPage = () => {
   const [progress, setProgress] = useState(0);
   const [favorites, setFavorites] = useState([]);
   const [plantListLoading,setPlantListLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleError = () => {
+    setOpen(true);  // Open the Snackbar with the error message
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return; // Prevents closing on clickaway if needed
+    setOpen(false);  // Close the Snackbar
+  };
+
   useEffect(() => {
 
     loadFavorites();
@@ -70,7 +83,8 @@ const ScanPage = () => {
         setIsModalOpen(true);
       } catch (error) {
         console.error('Error identifying plant:', error);
-        alert('Error identifying plant. Please try again.');
+        handleError();
+    
       } finally {
         setIsLoading(false);
         setProgress(100);
@@ -119,7 +133,7 @@ const ScanPage = () => {
   
     } catch (error) {
       console.error('Error fetching plant details:', error);
-      // You might want to set an error state here to display to the user
+      handleError();
     } finally {
       setModalOpen(true);
       setPlantListLoading(false)
@@ -150,7 +164,7 @@ const ScanPage = () => {
       // Handle response as needed
     } catch (error) {
       console.error('Error identifying plant:', error);
-      alert('Error identifying plant. Please try again.');
+      handleError();
     } finally {
       setIsLoading(false);
     }
@@ -205,6 +219,11 @@ const ScanPage = () => {
         accessToken={selectedPlantToken}
         favorites={favorites}
       />
+          <Snackbar   anchorOrigin={{ vertical: 'top', horizontal: 'center' }}  open={open} autoHideDuration={6000} onClose={handleClose}>
+        <MuiAlert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Error identifying plant. Please try again.
+        </MuiAlert>
+      </Snackbar>
      
         </div>
       );
