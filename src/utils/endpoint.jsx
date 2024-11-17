@@ -1,7 +1,7 @@
 
 
 
-export const API_KEY = 'YsrUmEPprC5st4Xm80UyfP9MpKXp755XsUsCXGM7gAkew4SDBO';
+export const API_KEY = '9qAUHOh4p3xOcW5kQUnqKgliWz7DB7sMYqAtZ1yLVBLTBmvEMA';
 
 export const API_URL = 'https://plant.id/api/v3/kb/plants';
 
